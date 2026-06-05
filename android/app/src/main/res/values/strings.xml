@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">the-human-archive</string>
+    <string name="title_activity_main">the-human-archive</string>
+    <string name="package_name">com.vihaan.thehumanarchive</string>
+    <string name="custom_url_scheme">com.vihaan.thehumanarchive</string>
+</resources>
