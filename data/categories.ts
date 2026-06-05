@@ -1,10 +1,3 @@
-/* ==========================================================
-   THE HUMAN ARCHIVE
-   DATA / CATEGORIES
-   File:
-   D:\Project\the-human-archive\data\categories.ts
-========================================================== */
-
 import {
   Archive,
   BookOpen,

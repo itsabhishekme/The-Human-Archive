@@ -1,13 +1,3 @@
-/* ==========================================================
-   THE HUMAN ARCHIVE
-   DATA / STORIES
-   File:
-   D:\Project\the-human-archive\data\stories.ts
-
-   Central Story Repository
-   Next.js 15 + TypeScript
-========================================================== */
-
 export interface StoryAuthor {
   name: string;
   avatar?: string;

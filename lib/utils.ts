@@ -1,12 +1,3 @@
-/* ==========================================================
-   THE HUMAN ARCHIVE
-   File:
-   D:\Project\the-human-archive\lib\utils.ts
-
-   Utility Functions Library
-   Next.js 15 + TypeScript
-========================================================== */
-
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
