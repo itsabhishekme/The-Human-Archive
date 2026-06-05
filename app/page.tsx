@@ -1,65 +1,168 @@
-import Image from "next/image";
+import Hero from "@/components/Hero";
+import StoryGrid from "@/components/StoryGrid";
+import SectionTitle from "@/components/SectionTitle";
+import {
+  archiveStats,
+} from "@/data/categories";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="overflow-x-hidden">
+      {/* HERO */}
+
+      <Hero />
+
+      {/* MISSION */}
+
+      <section className="py-32">
+        <div className="max-w-7xl mx-auto px-6">
+          <SectionTitle
+            eyebrow="Our Mission"
+            title="Preserving Stories Before They Disappear"
+            subtitle="Every person carries memories, lessons, letters, regrets, transformations, and turning points that deserve to be remembered."
+          />
+
+          <div className="grid lg:grid-cols-3 gap-8 mt-20">
+            <div className="archive-card p-10">
+              <h3 className="text-3xl font-bold mb-6">
+                Human Stories
+              </h3>
+
+              <p className="text-zinc-400 leading-relaxed">
+                Real experiences shared by
+                people from different walks
+                of life.
+              </p>
+            </div>
+
+            <div className="archive-card p-10">
+              <h3 className="text-3xl font-bold mb-6">
+                Living Archive
+              </h3>
+
+              <p className="text-zinc-400 leading-relaxed">
+                A growing collection of
+                memories preserved for
+                future generations.
+              </p>
+            </div>
+
+            <div className="archive-card p-10">
+              <h3 className="text-3xl font-bold mb-6">
+                Global Voices
+              </h3>
+
+              <p className="text-zinc-400 leading-relaxed">
+                Stories contributed from
+                around the world.
+              </p>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* STATS */}
+
+      <section className="py-32">
+        <div className="max-w-7xl mx-auto px-6">
+          <SectionTitle
+            eyebrow="Archive Statistics"
+            title="A Growing Human Collection"
+            subtitle="Every story preserved becomes part of a larger human record."
+          />
+
+          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8 mt-20">
+            <div className="archive-card p-10 text-center">
+              <h3 className="text-6xl font-black gradient-text mb-4">
+                {archiveStats.totalStories}
+              </h3>
+
+              <p className="text-zinc-500">
+                Stories Archived
+              </p>
+            </div>
+
+            <div className="archive-card p-10 text-center">
+              <h3 className="text-6xl font-black gradient-text mb-4">
+                {archiveStats.totalCollections}
+              </h3>
+
+              <p className="text-zinc-500">
+                Collections
+              </p>
+            </div>
+
+            <div className="archive-card p-10 text-center">
+              <h3 className="text-6xl font-black gradient-text mb-4">
+                {archiveStats.countriesRepresented}
+              </h3>
+
+              <p className="text-zinc-500">
+                Countries
+              </p>
+            </div>
+
+            <div className="archive-card p-10 text-center">
+              <h3 className="text-6xl font-black gradient-text mb-4">
+                {archiveStats.activeContributors}
+              </h3>
+
+              <p className="text-zinc-500">
+                Contributors
+              </p>
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* STORIES */}
+
+      <section className="py-32">
+        <div className="max-w-7xl mx-auto px-6">
+          <StoryGrid />
+        </div>
+      </section>
+
+      {/* FINAL CTA */}
+
+      <section className="py-32">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="archive-card p-16 md:p-24 text-center">
+            <p className="uppercase tracking-[0.4em] text-zinc-500 mb-8">
+              The Human Archive
+            </p>
+
+            <h2 className="text-5xl md:text-7xl font-black leading-none mb-10">
+              Every Life Holds
+              <br />
+              A Story Worth Saving
+            </h2>
+
+            <p className="max-w-3xl mx-auto text-zinc-400 text-xl leading-relaxed mb-12">
+              Share your memories,
+              experiences, turning points,
+              lessons, and letters with the
+              archive.
+            </p>
+
+            <div className="flex flex-col sm:flex-row justify-center gap-6">
+              <a
+                href="/stories"
+                className="btn-primary"
+              >
+                Explore Stories
+              </a>
+
+              <a
+                href="/submit"
+                className="btn-outline"
+              >
+                Submit Your Story
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
