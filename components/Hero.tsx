@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -16,518 +17,289 @@ import {
   Users,
   Archive,
   Stars,
+  Globe,
+  PenSquare,
+  Shield,
 } from "lucide-react";
 
-interface HeroProps {
-  title?: string;
-  subtitle?: string;
-  description?: string;
-  primaryButtonText?: string;
-  primaryButtonHref?: string;
-  secondaryButtonText?: string;
-  secondaryButtonHref?: string;
-}
-
-export default function Hero({
-  title = "The Human Archive",
-  subtitle = "Preserving the stories people never thought anyone would read.",
-  description = "A living collection of untold stories, letters never sent, turning points, regrets, lessons, transformations, and memories that deserve to survive beyond a single lifetime.",
-  primaryButtonText = "Explore Archive",
-  primaryButtonHref = "/archive",
-  secondaryButtonText = "Submit Story",
-  secondaryButtonHref = "/submit",
-}: HeroProps) {
+export default function Page() {
   return (
-    <section className="relative min-h-screen overflow-hidden flex items-center">
-      {/* Background Layers */}
+    <main className="bg-black text-white overflow-hidden">
+      {/* HERO */}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/human-archive.jpg"
+            alt="The Human Archive"
+            fill
+            priority
+            className="object-cover opacity-30"
+          />
 
-      <div className="absolute inset-0">
-        {/* Grid */}
+          <div className="absolute inset-0 bg-black/70" />
 
-        <div
-          className="
-            absolute
-            inset-0
-            opacity-[0.03]
-            [background-image:linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)]
-            [background-size:80px_80px]
-          "
-        />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black" />
+        </div>
 
-        {/* Glow 1 */}
-
-        <div
-          className="
-            absolute
-            top-0
-            left-1/2
-            -translate-x-1/2
-            w-[1200px]
-            h-[1200px]
-            rounded-full
-            bg-amber-300/[0.05]
-            blur-[180px]
-          "
-        />
-
-        {/* Glow 2 */}
-
-        <div
-          className="
-            absolute
-            bottom-0
-            right-0
-            w-[700px]
-            h-[700px]
-            rounded-full
-            bg-orange-500/[0.04]
-            blur-[140px]
-          "
-        />
-
-        {/* Glow 3 */}
-
-        <div
-          className="
-            absolute
-            top-20
-            left-0
-            w-[500px]
-            h-[500px]
-            rounded-full
-            bg-white/[0.02]
-            blur-[120px]
-          "
-        />
-
-        {/* Overlay */}
-
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black" />
-      </div>
-
-      {/* Floating Elements */}
-
-      <motion.div
-        animate={{
-          y: [0, -20, 0],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-        }}
-        className="
-          hidden
-          lg:flex
-          absolute
-          top-32
-          right-24
-          w-20
-          h-20
-          rounded-3xl
-          bg-amber-300/10
-          border
-          border-amber-300/10
-          items-center
-          justify-center
-        "
-      >
-        <BookOpen className="w-9 h-9 text-amber-300" />
-      </motion.div>
-
-      <motion.div
-        animate={{
-          y: [0, 25, 0],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-        }}
-        className="
-          hidden
-          lg:flex
-          absolute
-          left-24
-          top-60
-          w-16
-          h-16
-          rounded-2xl
-          bg-white/[0.03]
-          border
-          border-white/10
-          items-center
-          justify-center
-        "
-      >
-        <Mail className="w-7 h-7 text-white/80" />
-      </motion.div>
-
-      <motion.div
-        animate={{
-          y: [0, -15, 0],
-        }}
-        transition={{
-          duration: 7,
-          repeat: Infinity,
-        }}
-        className="
-          hidden
-          xl:flex
-          absolute
-          bottom-40
-          right-40
-          w-14
-          h-14
-          rounded-xl
-          bg-white/[0.03]
-          border
-          border-white/10
-          items-center
-          justify-center
-        "
-      >
-        <Heart className="w-6 h-6 text-white/70" />
-      </motion.div>
-
-      {/* Main Content */}
-
-      <div className="relative z-20 max-w-7xl mx-auto px-6 w-full">
-        <div className="grid lg:grid-cols-12 gap-16 items-center">
-          {/* Left Content */}
-
-          <div className="lg:col-span-7">
-            <motion.div
-              initial={{
-                opacity: 0,
-                y: 40,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              transition={{
-                duration: 0.8,
-              }}
-            >
-              {/* Badge */}
-
-              <div
-                className="
-                  inline-flex
-                  items-center
-                  gap-3
-                  px-5
-                  py-3
-                  rounded-full
-                  border
-                  border-white/10
-                  bg-white/[0.03]
-                  mb-10
-                "
-              >
+        <div className="relative z-10 max-w-7xl mx-auto px-6 py-32">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            <div>
+              <div className="inline-flex items-center gap-3 px-5 py-3 rounded-full border border-white/10 bg-white/5 mb-8">
                 <Sparkles className="w-4 h-4 text-amber-300" />
-
-                <span className="text-sm text-zinc-300 tracking-wide">
-                  Digital Preservation Project
+                <span className="text-sm text-zinc-300">
+                  Humanity's Living Memory
                 </span>
               </div>
 
-              {/* Title */}
-
-              <h1
-                className="
-                  text-6xl
-                  md:text-8xl
-                  xl:text-[8rem]
-                  font-bold
-                  leading-[0.9]
-                  tracking-tight
-                  mb-8
-                "
-              >
-                {title}
+              <h1 className="text-6xl md:text-8xl font-black leading-none mb-8">
+                The Human Archive
               </h1>
 
-              {/* Subtitle */}
-
-              <p
-                className="
-                  text-2xl
-                  md:text-3xl
-                  text-amber-300
-                  font-light
-                  mb-8
-                  max-w-4xl
-                "
-              >
-                {subtitle}
+              <p className="text-2xl text-amber-300 mb-8 max-w-3xl">
+                Preserving the stories people never thought anyone would read.
               </p>
 
-              {/* Description */}
-
-              <p
-                className="
-                  text-lg
-                  md:text-xl
-                  text-zinc-400
-                  leading-relaxed
-                  max-w-3xl
-                  mb-12
-                "
-              >
-                {description}
+              <p className="text-lg text-zinc-400 leading-relaxed max-w-3xl mb-10">
+                Every person carries a hidden archive. Letters never sent.
+                Dreams abandoned. Transformations nobody witnessed.
+                Conversations remembered for decades. The Human Archive
+                preserves these moments before they disappear into silence.
               </p>
 
-              {/* Buttons */}
-
-              <div className="flex flex-col sm:flex-row gap-5 mb-16">
+              <div className="flex flex-wrap gap-5">
                 <Link
-                  href={primaryButtonHref}
-                  className="btn-primary"
+                  href="/archive"
+                  className="px-8 py-4 rounded-full bg-amber-300 text-black font-semibold flex items-center gap-3"
                 >
-                  {primaryButtonText}
-                  <ArrowRight className="ml-3 w-5 h-5" />
+                  Explore Archive
+                  <ArrowRight className="w-5 h-5" />
                 </Link>
 
                 <Link
-                  href={secondaryButtonHref}
-                  className="btn-outline"
+                  href="/submit"
+                  className="px-8 py-4 rounded-full border border-white/20"
                 >
-                  {secondaryButtonText}
+                  Submit Story
                 </Link>
 
-                <button className="btn-outline">
-                  <Play className="mr-3 w-4 h-4" />
+                <button className="px-8 py-4 rounded-full border border-white/20 flex items-center gap-3">
+                  <Play className="w-4 h-4" />
                   Watch Mission
                 </button>
               </div>
+            </div>
 
-              {/* Statistics */}
-
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                {[
-                  {
-                    value: "1,248",
-                    label: "Stories",
-                  },
-                  {
-                    value: "542",
-                    label: "Letters",
-                  },
-                  {
-                    value: "98",
-                    label: "Collections",
-                  },
-                  {
-                    value: "42",
-                    label: "Countries",
-                  },
-                ].map((item) => (
-                  <div
-                    key={item.label}
-                    className="archive-card p-6"
-                  >
-                    <h3 className="text-3xl font-bold gradient-text">
-                      {item.value}
-                    </h3>
-
-                    <p className="text-zinc-500 mt-2 text-sm">
-                      {item.label}
-                    </p>
-                  </div>
-                ))}
+            <motion.div
+              animate={{ y: [0, -20, 0] }}
+              transition={{ duration: 8, repeat: Infinity }}
+              className="relative"
+            >
+              <div className="relative h-[650px] rounded-[40px] overflow-hidden border border-white/10">
+                <Image
+                  src="/images/human-archive.jpg"
+                  alt="Archive"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </motion.div>
           </div>
+        </div>
 
-          {/* Right Side */}
+        <motion.div
+          animate={{ y: [0, 12, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        >
+          <ChevronDown className="w-8 h-8 text-white/60" />
+        </motion.div>
+      </section>
 
-          <div className="lg:col-span-5">
-            <motion.div
-              initial={{
-                opacity: 0,
-                x: 60,
-              }}
-              animate={{
-                opacity: 1,
-                x: 0,
-              }}
-              transition={{
-                duration: 1,
-              }}
-              className="space-y-8"
-            >
-              {/* Featured Quote */}
-
-              <div className="archive-card p-10">
-                <Quote className="w-12 h-12 text-amber-300 mb-6" />
-
-                <h3 className="text-3xl font-bold mb-6">
-                  Why This Archive Exists
+      {/* STATS */}
+      <section className="py-24 border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-4 gap-6">
+            {[
+              ["1,248", "Stories"],
+              ["542", "Letters"],
+              ["98", "Collections"],
+              ["42", "Countries"],
+            ].map(([value, label]) => (
+              <div
+                key={label}
+                className="p-8 rounded-3xl bg-white/[0.03] border border-white/10"
+              >
+                <h3 className="text-5xl font-black text-amber-300">
+                  {value}
                 </h3>
 
-                <p className="text-zinc-400 leading-relaxed text-lg">
-                  Most human experiences vanish
-                  quietly. Conversations disappear.
-                  Memories fade. Stories remain untold.
-                  The Human Archive exists so these
-                  voices have a place to live.
+                <p className="text-zinc-400 mt-3">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* WHY IT EXISTS */}
+      <section className="py-32">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <Quote className="w-16 h-16 mx-auto mb-8 text-amber-300" />
+
+          <h2 className="text-5xl md:text-7xl font-black mb-10">
+            Humanity's Stories Deserve To Survive Time
+          </h2>
+
+          <p className="text-xl text-zinc-400 leading-relaxed max-w-4xl mx-auto">
+            Most human experiences disappear quietly. Memories fade. Voices are
+            forgotten. Entire lifetimes become invisible. The Human Archive was
+            created so meaningful experiences have a permanent place to exist
+            beyond a single lifetime.
+          </p>
+        </div>
+      </section>
+
+      {/* COLLECTIONS */}
+      <section className="py-32 bg-white/[0.02]">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-5xl font-black text-center mb-20">
+            Featured Collections
+          </h2>
+
+          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
+            {[
+              {
+                icon: Mail,
+                title: "Letters Never Sent",
+                desc: "Messages that remained in the heart.",
+              },
+              {
+                icon: Clock3,
+                title: "Turning Points",
+                desc: "Moments that changed everything.",
+              },
+              {
+                icon: Feather,
+                title: "Lessons & Regrets",
+                desc: "Wisdom earned through experience.",
+              },
+              {
+                icon: Heart,
+                title: "Love Stories",
+                desc: "Connections that shaped lives.",
+              },
+            ].map((item) => {
+              const Icon = item.icon;
+
+              return (
+                <div
+                  key={item.title}
+                  className="p-8 rounded-3xl border border-white/10 bg-white/[0.03]"
+                >
+                  <Icon className="w-10 h-10 text-amber-300 mb-6" />
+
+                  <h3 className="text-2xl font-bold mb-4">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-zinc-400">{item.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* MISSION */}
+      <section className="py-32">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-3 gap-8">
+            {[
+              {
+                icon: Archive,
+                title: "Preserve",
+                desc: "Protect stories from being forgotten.",
+              },
+              {
+                icon: Globe,
+                title: "Connect",
+                desc: "Create a shared memory of humanity.",
+              },
+              {
+                icon: Shield,
+                title: "Protect",
+                desc: "Give every voice a safe home.",
+              },
+            ].map((item) => {
+              const Icon = item.icon;
+
+              return (
+                <div
+                  key={item.title}
+                  className="p-10 rounded-3xl border border-white/10 bg-white/[0.03]"
+                >
+                  <Icon className="w-12 h-12 text-amber-300 mb-6" />
+
+                  <h3 className="text-3xl font-bold mb-4">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-zinc-400">{item.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURE IMAGE */}
+      <section className="py-32">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="relative h-[700px] rounded-[40px] overflow-hidden">
+            <Image
+              src="/images/human-archive.jpg"
+              alt="Human Stories"
+              fill
+              className="object-cover"
+            />
+
+            <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-center p-10">
+              <div>
+                <h2 className="text-6xl md:text-8xl font-black mb-8">
+                  Every Life Is A Story
+                </h2>
+
+                <p className="text-xl max-w-3xl mx-auto text-zinc-300">
+                  A single memory can outlive generations when it is preserved.
                 </p>
               </div>
-
-              {/* Collections */}
-
-              <div className="archive-card p-8">
-                <h3 className="text-2xl font-bold mb-8">
-                  Featured Collections
-                </h3>
-
-                <div className="space-y-4">
-                  {[
-                    {
-                      icon: Mail,
-                      title: "Letters Never Sent",
-                    },
-                    {
-                      icon: Sparkles,
-                      title: "Before I Became Me",
-                    },
-                    {
-                      icon: Clock3,
-                      title: "Turning Points",
-                    },
-                    {
-                      icon: Feather,
-                      title: "Regrets & Lessons",
-                    },
-                  ].map((item) => {
-                    const Icon = item.icon;
-
-                    return (
-                      <Link
-                        key={item.title}
-                        href="#"
-                        className="
-                          flex
-                          items-center
-                          justify-between
-                          p-4
-                          rounded-2xl
-                          hover:bg-white/[0.03]
-                          transition-all
-                          group
-                        "
-                      >
-                        <div className="flex items-center gap-4">
-                          <div
-                            className="
-                              w-12
-                              h-12
-                              rounded-xl
-                              bg-amber-300/10
-                              flex
-                              items-center
-                              justify-center
-                            "
-                          >
-                            <Icon className="w-5 h-5 text-amber-300" />
-                          </div>
-
-                          <span className="font-medium">
-                            {item.title}
-                          </span>
-                        </div>
-
-                        <ArrowRight
-                          className="
-                            w-4
-                            h-4
-                            text-zinc-500
-                            group-hover:text-amber-300
-                            transition-colors
-                          "
-                        />
-                      </Link>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* Trust Block */}
-
-              <div className="grid grid-cols-3 gap-4">
-                {[
-                  {
-                    icon: Users,
-                    label: "Voices",
-                  },
-                  {
-                    icon: Archive,
-                    label: "Preserved",
-                  },
-                  {
-                    icon: Stars,
-                    label: "Stories",
-                  },
-                ].map((item) => {
-                  const Icon = item.icon;
-
-                  return (
-                    <div
-                      key={item.label}
-                      className="
-                        archive-card
-                        p-6
-                        text-center
-                      "
-                    >
-                      <Icon className="w-7 h-7 text-amber-300 mx-auto mb-3" />
-
-                      <p className="text-sm text-zinc-400">
-                        {item.label}
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
-            </motion.div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Scroll Indicator */}
+      {/* CTA */}
+      <section className="py-40 border-t border-white/10">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <PenSquare className="w-16 h-16 text-amber-300 mx-auto mb-8" />
 
-      <motion.div
-        animate={{
-          y: [0, 12, 0],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-        }}
-        className="
-          absolute
-          bottom-10
-          left-1/2
-          -translate-x-1/2
-          z-20
-        "
-      >
-        <div
-          className="
-            flex
-            flex-col
-            items-center
-            gap-3
-            text-zinc-500
-          "
-        >
-          <span className="text-xs uppercase tracking-[0.3em]">
-            Scroll
-          </span>
+          <h2 className="text-5xl md:text-7xl font-black mb-8">
+            Add Your Story
+          </h2>
 
-          <ChevronDown className="w-5 h-5" />
+          <p className="text-xl text-zinc-400 max-w-3xl mx-auto mb-12">
+            Somewhere in your life is a story worth preserving. Share it with
+            future generations and become part of humanity's living archive.
+          </p>
+
+          <Link
+            href="/submit"
+            className="inline-flex items-center gap-3 px-10 py-5 rounded-full bg-amber-300 text-black font-bold text-lg"
+          >
+            Submit Your Story
+            <ArrowRight className="w-5 h-5" />
+          </Link>
         </div>
-      </motion.div>
-    </section>
+      </section>
+    </main>
   );
 }
