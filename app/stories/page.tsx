@@ -1,551 +1,326 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Search,
-  ArrowRight,
+  BookOpen,
   Calendar,
   Clock3,
-  User,
-  BookOpen,
-  TrendingUp,
+  ArrowRight,
   Sparkles,
-  Filter,
-  Bookmark,
-  Grid3X3,
-  LayoutList,
-  Heart,
-  Mail,
-  Feather,
-  Quote,
+  TrendingUp,
+  Star,
 } from "lucide-react";
 
-type Story = {
-  id: number;
-  title: string;
-  slug: string;
-  category: string;
-  author: string;
-  date: string;
-  readTime: string;
-  featured?: boolean;
-  excerpt: string;
-};
+const stories = [
+  {
+    id: 1,
+    title: "The Last Letter Never Sent",
+    excerpt:
+      "A forgotten letter hidden inside an old book reveals a story that waited decades to be discovered.",
+    image: "/images/stories/story-1.jpg",
+    category: "Human Stories",
+    date: "June 2026",
+    readTime: "8 min read",
+    featured: true,
+  },
+  {
+    id: 2,
+    title: "Echoes of a Silent Village",
+    excerpt:
+      "In a place almost erased by time, memories survive through the voices of its last residents.",
+    image: "/images/stories/story-2.jpg",
+    category: "History",
+    date: "May 2026",
+    readTime: "10 min read",
+  },
+  {
+    id: 3,
+    title: "The Stranger Who Changed Everything",
+    excerpt:
+      "One unexpected encounter transformed an ordinary day into a life-changing moment.",
+    image: "/images/stories/story-3.jpg",
+    category: "Inspiration",
+    date: "May 2026",
+    readTime: "7 min read",
+  },
+  {
+    id: 4,
+    title: "Footprints Across Generations",
+    excerpt:
+      "A family journey through time reveals how dreams travel from one generation to the next.",
+    image: "/images/stories/story-4.jpg",
+    category: "Family",
+    date: "April 2026",
+    readTime: "12 min read",
+  },
+  {
+    id: 5,
+    title: "The Human Archive Project",
+    excerpt:
+      "Why preserving overlooked stories may become one of the most important acts of our era.",
+    image: "/images/stories/story-5.jpg",
+    category: "Archive",
+    date: "April 2026",
+    readTime: "6 min read",
+  },
+  {
+    id: 6,
+    title: "When Memories Become History",
+    excerpt:
+      "Every memory holds a fragment of history waiting to be recorded and remembered.",
+    image: "/images/stories/story-6.jpg",
+    category: "History",
+    date: "March 2026",
+    readTime: "9 min read",
+  },
+];
+
+const categories = [
+  "All",
+  "Human Stories",
+  "History",
+  "Inspiration",
+  "Family",
+  "Archive",
+];
 
 export default function StoriesPage() {
   const [search, setSearch] = useState("");
-  const [activeCategory, setActiveCategory] =
-    useState("All");
-  const [gridView, setGridView] = useState(true);
-
-  const stories: Story[] = [
-    {
-      id: 1,
-      slug: "the-call-i-never-returned",
-      title: "The Call I Never Returned",
-      category: "Regrets",
-      author: "Anonymous",
-      date: "March 2026",
-      readTime: "8 min read",
-      featured: true,
-      excerpt:
-        "A missed phone call became one of the most important lessons of my life.",
-    },
-    {
-      id: 2,
-      slug: "the-letter-i-never-sent",
-      title: "The Letter I Never Sent",
-      category: "Letters",
-      author: "Anonymous",
-      date: "March 2026",
-      readTime: "10 min read",
-      excerpt:
-        "Some letters never reach their destination, yet still carry meaning through time.",
-    },
-    {
-      id: 3,
-      slug: "the-train-i-missed",
-      title: "The Train I Missed",
-      category: "Turning Point",
-      author: "Anonymous",
-      date: "February 2026",
-      readTime: "7 min read",
-      excerpt:
-        "A delayed journey unexpectedly changed the course of an entire future.",
-    },
-    {
-      id: 4,
-      slug: "before-i-became-me",
-      title: "Before I Became Me",
-      category: "Transformation",
-      author: "Anonymous",
-      date: "January 2026",
-      readTime: "12 min read",
-      excerpt:
-        "A story about identity, growth, healing, and becoming someone new.",
-    },
-    {
-      id: 5,
-      slug: "the-photograph-in-the-drawer",
-      title: "The Photograph In The Drawer",
-      category: "Memory",
-      author: "Anonymous",
-      date: "December 2025",
-      readTime: "6 min read",
-      excerpt:
-        "One forgotten photograph reopened memories that had slept for years.",
-    },
-    {
-      id: 6,
-      slug: "the-promise-i-couldnt-keep",
-      title: "The Promise I Couldn't Keep",
-      category: "Regrets",
-      author: "Anonymous",
-      date: "November 2025",
-      readTime: "8 min read",
-      excerpt:
-        "A reflection on responsibility, timing, and the promises we carry.",
-    },
-    {
-      id: 7,
-      slug: "dear-younger-me",
-      title: "Dear Younger Me",
-      category: "Letters",
-      author: "Anonymous",
-      date: "October 2025",
-      readTime: "9 min read",
-      excerpt:
-        "A message sent backward through time to a younger version of myself.",
-    },
-    {
-      id: 8,
-      slug: "starting-again-at-thirty-five",
-      title: "Starting Again At Thirty-Five",
-      category: "Transformation",
-      author: "Anonymous",
-      date: "September 2025",
-      readTime: "11 min read",
-      excerpt:
-        "What happens when life forces you to begin again from zero.",
-    },
-  ];
-
-  const categories = [
-    "All",
-    "Letters",
-    "Transformation",
-    "Regrets",
-    "Turning Point",
-    "Memory",
-  ];
+  const [activeCategory, setActiveCategory] = useState("All");
 
   const filteredStories = useMemo(() => {
     return stories.filter((story) => {
-      const categoryMatch =
-        activeCategory === "All" ||
-        story.category === activeCategory;
+      const matchesSearch =
+        story.title.toLowerCase().includes(search.toLowerCase()) ||
+        story.excerpt.toLowerCase().includes(search.toLowerCase());
 
-      const searchMatch =
-        story.title
-          .toLowerCase()
-          .includes(search.toLowerCase()) ||
-        story.excerpt
-          .toLowerCase()
-          .includes(search.toLowerCase());
+      const matchesCategory =
+        activeCategory === "All" || story.category === activeCategory;
 
-      return categoryMatch && searchMatch;
+      return matchesSearch && matchesCategory;
     });
   }, [search, activeCategory]);
 
-  const featuredStory = stories.find(
-    (story) => story.featured
-  );
+  const featuredStory = stories.find((story) => story.featured);
 
   return (
-    <main className="relative overflow-hidden">
+    <main className="min-h-screen bg-black text-white">
       {/* HERO */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/stories/hero.jpg"
+            alt="The Human Archive"
+            fill
+            priority
+            className="object-cover opacity-30"
+          />
+        </div>
 
-      <section className="relative pt-40 pb-24">
-        <div className="absolute inset-0 bg-gradient-to-b from-amber-300/10 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/70 to-black" />
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="relative z-10 mx-auto max-w-7xl px-6 py-32 lg:px-8">
           <motion.div
-            initial={{
-              opacity: 0,
-              y: 50,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              duration: 0.8,
-            }}
-            className="text-center"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="max-w-4xl"
           >
-            <p className="uppercase tracking-[0.5em] text-zinc-500 mb-8">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm backdrop-blur">
+              <Sparkles className="h-4 w-4" />
               The Human Archive
-            </p>
+            </div>
 
-            <h1 className="text-6xl md:text-8xl xl:text-9xl font-bold leading-none mb-10">
-              Stories
+            <h1 className="mb-6 text-5xl font-bold leading-tight md:text-7xl">
+              Stories Worth
+              <span className="block bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent">
+                Remembering
+              </span>
             </h1>
 
-            <p className="max-w-4xl mx-auto text-zinc-400 text-xl md:text-2xl leading-relaxed">
-              A collection of human experiences,
-              memories, lessons, transformations,
-              regrets, and moments that deserve
-              to be remembered.
+            <p className="max-w-2xl text-lg text-zinc-300 md:text-xl">
+              A collection of forgotten voices, hidden histories, personal
+              journeys, and extraordinary human experiences preserved for future
+              generations.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* STATS */}
-
-      <section className="pb-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              ["1,248", "Stories"],
-              ["542", "Letters"],
-              ["312", "Life Lessons"],
-              ["98", "Transformations"],
-            ].map(([number, label]) => (
-              <div
-                key={label}
-                className="archive-card p-8 text-center"
-              >
-                <h3 className="text-5xl font-bold gradient-text">
-                  {number}
-                </h3>
-
-                <p className="text-zinc-400 mt-3">
-                  {label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FEATURED */}
-
+      {/* FEATURED STORY */}
       {featuredStory && (
-        <section className="pb-32">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="archive-card overflow-hidden">
-              <div className="grid lg:grid-cols-2">
-                <div className="min-h-[600px] bg-gradient-to-br from-amber-300/10 via-zinc-900 to-black" />
+        <section className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+          <div className="mb-8 flex items-center gap-2 text-amber-400">
+            <Star className="h-5 w-5 fill-current" />
+            <span className="font-medium">Featured Story</span>
+          </div>
 
-                <div className="p-12 lg:p-16 flex flex-col justify-center">
-                  <span className="text-amber-300 uppercase tracking-[0.3em] mb-6">
-                    Featured Story
+          <motion.div
+            whileHover={{ y: -4 }}
+            className="overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-900"
+          >
+            <div className="grid lg:grid-cols-2">
+              <div className="relative h-[400px]">
+                <Image
+                  src={featuredStory.image}
+                  alt={featuredStory.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+
+              <div className="flex flex-col justify-center p-10">
+                <div className="mb-4 inline-flex w-fit rounded-full bg-white/10 px-3 py-1 text-sm">
+                  {featuredStory.category}
+                </div>
+
+                <h2 className="mb-5 text-4xl font-bold">
+                  {featuredStory.title}
+                </h2>
+
+                <p className="mb-6 text-zinc-400">
+                  {featuredStory.excerpt}
+                </p>
+
+                <div className="mb-8 flex gap-5 text-sm text-zinc-500">
+                  <span className="flex items-center gap-2">
+                    <Calendar size={16} />
+                    {featuredStory.date}
                   </span>
 
-                  <h2 className="text-5xl md:text-6xl font-bold mb-8">
-                    {featuredStory.title}
-                  </h2>
-
-                  <p className="text-zinc-400 text-lg leading-relaxed mb-10">
-                    {featuredStory.excerpt}
-                  </p>
-
-                  <div className="flex gap-6 text-zinc-500 mb-10">
-                    <div className="flex items-center gap-2">
-                      <Calendar size={16} />
-                      {featuredStory.date}
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <Clock3 size={16} />
-                      {featuredStory.readTime}
-                    </div>
-                  </div>
-
-                  <Link
-                    href={`/stories/${featuredStory.slug}`}
-                    className="btn-primary w-fit"
-                  >
-                    Read Story
-                  </Link>
+                  <span className="flex items-center gap-2">
+                    <Clock3 size={16} />
+                    {featuredStory.readTime}
+                  </span>
                 </div>
+
+                <Link
+                  href="#"
+                  className="inline-flex w-fit items-center gap-2 rounded-xl bg-white px-5 py-3 font-semibold text-black transition hover:scale-105"
+                >
+                  Read Story
+                  <ArrowRight size={18} />
+                </Link>
               </div>
             </div>
-          </div>
+          </motion.div>
         </section>
       )}
 
       {/* SEARCH */}
+      <section className="mx-auto max-w-7xl px-6 pb-8 lg:px-8">
+        <div className="relative">
+          <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-zinc-500" />
+          <input
+            type="text"
+            placeholder="Search stories..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full rounded-2xl border border-zinc-800 bg-zinc-900 py-4 pl-12 pr-4 outline-none focus:border-zinc-600"
+          />
+        </div>
+      </section>
 
-      <section className="pb-16">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="archive-card p-6">
-            <div className="flex flex-col lg:flex-row gap-6">
-              <div className="relative flex-1">
-                <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-zinc-500" />
+      {/* FILTERS */}
+      <section className="mx-auto max-w-7xl px-6 pb-12 lg:px-8">
+        <div className="flex flex-wrap gap-3">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => setActiveCategory(category)}
+              className={`rounded-full px-5 py-2 transition ${
+                activeCategory === category
+                  ? "bg-white text-black"
+                  : "border border-zinc-700 bg-zinc-900 text-zinc-300 hover:border-zinc-500"
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+      </section>
 
-                <input
-                  type="text"
-                  placeholder="Search stories..."
-                  value={search}
-                  onChange={(e) =>
-                    setSearch(e.target.value)
-                  }
-                  className="
-                    w-full
-                    bg-transparent
-                    border
-                    border-white/10
-                    rounded-2xl
-                    pl-14
-                    pr-4
-                    py-4
-                    outline-none
-                    focus:border-amber-300/30
-                  "
+      {/* STATS */}
+      <section className="mx-auto max-w-7xl px-6 pb-16 lg:px-8">
+        <div className="grid gap-6 md:grid-cols-3">
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
+            <BookOpen className="mb-4 h-8 w-8 text-white" />
+            <h3 className="text-3xl font-bold">{stories.length}</h3>
+            <p className="text-zinc-400">Published Stories</p>
+          </div>
+
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
+            <TrendingUp className="mb-4 h-8 w-8 text-white" />
+            <h3 className="text-3xl font-bold">50K+</h3>
+            <p className="text-zinc-400">Monthly Readers</p>
+          </div>
+
+          <div className="rounded-2xl border border-zinc-800 bg-zinc-900 p-6">
+            <Sparkles className="mb-4 h-8 w-8 text-white" />
+            <h3 className="text-3xl font-bold">100%</h3>
+            <p className="text-zinc-400">Human Experiences</p>
+          </div>
+        </div>
+      </section>
+
+      {/* STORIES GRID */}
+      <section className="mx-auto max-w-7xl px-6 pb-24 lg:px-8">
+        <div className="mb-10">
+          <h2 className="text-4xl font-bold">Latest Stories</h2>
+          <p className="mt-2 text-zinc-400">
+            Discover remarkable stories from around the world.
+          </p>
+        </div>
+
+        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+          {filteredStories.map((story, index) => (
+            <motion.article
+              key={story.id}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.08 }}
+              whileHover={{ y: -8 }}
+              className="group overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-900"
+            >
+              <div className="relative h-64 overflow-hidden">
+                <Image
+                  src={story.image}
+                  alt={story.title}
+                  fill
+                  className="object-cover transition duration-700 group-hover:scale-110"
                 />
               </div>
 
-              <button className="btn-outline flex items-center gap-3">
-                <Filter size={18} />
-                Filters
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+              <div className="p-6">
+                <span className="rounded-full bg-white/10 px-3 py-1 text-xs">
+                  {story.category}
+                </span>
 
-      {/* CATEGORY FILTERS */}
+                <h3 className="mt-4 text-2xl font-bold transition group-hover:text-zinc-300">
+                  {story.title}
+                </h3>
 
-      <section className="pb-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-wrap gap-4 justify-center">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() =>
-                  setActiveCategory(category)
-                }
-                className={`
-                  px-6 py-3 rounded-full transition-all
-                  ${
-                    activeCategory === category
-                      ? "bg-amber-300 text-black"
-                      : "border border-white/10"
-                  }
-                `}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
+                <p className="mt-3 text-zinc-400">{story.excerpt}</p>
 
-      {/* VIEW SWITCH */}
-
-      <section className="pb-12">
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <div>
-            <h2 className="text-4xl font-bold">
-              Explore Stories
-            </h2>
-
-            <p className="text-zinc-500 mt-3">
-              {filteredStories.length} stories
-              available
-            </p>
-          </div>
-
-          <div className="flex gap-3">
-            <button
-              onClick={() => setGridView(true)}
-              className="btn-outline"
-            >
-              <Grid3X3 size={18} />
-            </button>
-
-            <button
-              onClick={() => setGridView(false)}
-              className="btn-outline"
-            >
-              <LayoutList size={18} />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* STORIES */}
-
-      <section className="pb-32">
-        <div className="max-w-7xl mx-auto px-6">
-          <div
-            className={
-              gridView
-                ? "grid md:grid-cols-2 xl:grid-cols-3 gap-8"
-                : "space-y-8"
-            }
-          >
-            {filteredStories.map(
-              (story, index) => (
-                <motion.article
-                  key={story.id}
-                  initial={{
-                    opacity: 0,
-                    y: 40,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  viewport={{
-                    once: true,
-                  }}
-                  transition={{
-                    delay: index * 0.05,
-                  }}
-                  className="archive-card overflow-hidden"
-                >
-                  <div className="h-64 bg-gradient-to-br from-amber-300/10 via-zinc-900 to-black" />
-
-                  <div className="p-8">
-                    <div className="flex justify-between items-center mb-5">
-                      <span className="px-4 py-2 rounded-full bg-amber-300/10 text-amber-300 text-sm">
-                        {story.category}
-                      </span>
-
-                      <Bookmark size={18} />
-                    </div>
-
-                    <h3 className="text-3xl font-bold mb-5">
-                      {story.title}
-                    </h3>
-
-                    <p className="text-zinc-400 leading-relaxed mb-8">
-                      {story.excerpt}
-                    </p>
-
-                    <div className="space-y-3 text-zinc-500 text-sm">
-                      <div className="flex items-center gap-2">
-                        <User size={14} />
-                        {story.author}
-                      </div>
-
-                      <div className="flex items-center gap-2">
-                        <Calendar size={14} />
-                        {story.date}
-                      </div>
-
-                      <div className="flex items-center gap-2">
-                        <Clock3 size={14} />
-                        {story.readTime}
-                      </div>
-                    </div>
-
-                    <Link
-                      href={`/stories/${story.slug}`}
-                      className="mt-8 flex items-center gap-2 text-amber-300"
-                    >
-                      Read Story
-                      <ArrowRight size={16} />
-                    </Link>
-                  </div>
-                </motion.article>
-              )
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* COLLECTIONS */}
-
-      <section className="pb-32">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-7xl font-bold">
-              Collections
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
-            {[
-              {
-                icon: Mail,
-                title: "Letters",
-              },
-              {
-                icon: Sparkles,
-                title: "Transformation",
-              },
-              {
-                icon: Heart,
-                title: "Regrets",
-              },
-              {
-                icon: Feather,
-                title: "Memory",
-              },
-            ].map((item) => {
-              const Icon = item.icon;
-
-              return (
-                <div
-                  key={item.title}
-                  className="archive-card p-10 text-center"
-                >
-                  <div className="w-16 h-16 rounded-2xl bg-amber-300/10 mx-auto flex items-center justify-center mb-6">
-                    <Icon className="w-8 h-8 text-amber-300" />
-                  </div>
-
-                  <h3 className="text-2xl font-bold">
-                    {item.title}
-                  </h3>
+                <div className="mt-5 flex justify-between text-sm text-zinc-500">
+                  <span>{story.date}</span>
+                  <span>{story.readTime}</span>
                 </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
-      {/* QUOTE */}
-
-      <section className="pb-32">
-        <div className="max-w-5xl mx-auto px-6 text-center">
-          <Quote className="w-14 h-14 text-amber-300 mx-auto mb-8" />
-
-          <h2 className="text-4xl md:text-6xl font-bold leading-tight">
-            The stories we preserve today
-            become the memories that guide
-            tomorrow.
-          </h2>
-        </div>
-      </section>
-
-      {/* CTA */}
-
-      <section className="pb-32">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="archive-card p-16 md:p-24 text-center">
-            <BookOpen className="w-16 h-16 text-amber-300 mx-auto mb-8" />
-
-            <h2 className="text-5xl md:text-8xl font-bold mb-8">
-              Share Your Story
-            </h2>
-
-            <p className="max-w-3xl mx-auto text-zinc-400 text-xl leading-relaxed mb-12">
-              Every experience carries meaning.
-              Help preserve memories, lessons,
-              and human stories for future readers.
-            </p>
-
-            <button className="btn-primary text-lg px-10 py-5">
-              Submit Story
-              <ArrowRight className="ml-3 w-5 h-5" />
-            </button>
-          </div>
+                <Link
+                  href="#"
+                  className="mt-6 inline-flex items-center gap-2 font-medium text-white"
+                >
+                  Read More
+                  <ArrowRight size={18} />
+                </Link>
+              </div>
+            </motion.article>
+          ))}
         </div>
       </section>
     </main>
