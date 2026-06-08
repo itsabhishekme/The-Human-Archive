@@ -124,7 +124,7 @@ export default function StoryGridPage() {
           <div className="grid lg:grid-cols-2">
             <div className="relative min-h-[500px]">
               <Image
-                src="/images/featured-story.jpg"
+                src="/images/story1.jpg"
                 alt={featuredStory.title}
                 fill
                 className="object-cover"

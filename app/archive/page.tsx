@@ -190,7 +190,7 @@ export default function ArchivePage() {
 
           <div className="mt-20 relative h-[650px] rounded-[40px] overflow-hidden border border-white/10">
             <Image
-              src="/archive/hero.jpg"
+              src="/images/hero.jpg"
               alt="Human Archive"
               fill
               className="object-cover"
@@ -287,7 +287,7 @@ export default function ArchivePage() {
             <div className="grid lg:grid-cols-2">
               <div className="relative min-h-[650px]">
                 <Image
-                  src="/archive/featured-story.jpg"
+                  src="/images/story1.jpg"
                   alt="Featured Story"
                   fill
                   className="object-cover"
