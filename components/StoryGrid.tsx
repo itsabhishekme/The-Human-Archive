@@ -475,7 +475,7 @@ const stories = [
     id: 2,
     title: "The Letter I Never Sent",
     category: "Letters",
-    image: "/images/story2.jpg",
+    image: "/images/story-2.jpg",
     excerpt:
       "Some letters never reach their destination but still carry meaning.",
   },
@@ -483,7 +483,7 @@ const stories = [
     id: 3,
     title: "Before I Became Me",
     category: "Transformation",
-    image: "/images/story3.jpg",
+    image: "/images/story-3.jpg",
     excerpt:
       "The story of identity, healing, and becoming someone new.",
   },
