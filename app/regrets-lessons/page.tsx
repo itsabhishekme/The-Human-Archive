@@ -1,17 +1,16 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   HeartCrack,
   Lightbulb,
-  BookOpen,
   Clock3,
   Calendar,
   User,
   ArrowRight,
   Quote,
   Shield,
-  Sparkles,
   Mountain,
   Compass,
   TrendingUp,
@@ -28,6 +27,7 @@ export default function RegretsAndLessonsPage() {
       date: "March 2026",
       readTime: "7 min read",
       category: "Career",
+      image: "/images/regrets/opportunity.jpg",
       excerpt:
         "I thought I had time. Looking back, I realize opportunities rarely wait for certainty.",
     },
@@ -37,6 +37,7 @@ export default function RegretsAndLessonsPage() {
       date: "February 2026",
       readTime: "9 min read",
       category: "Relationships",
+      image: "/images/regrets/apology.jpg",
       excerpt:
         "Pride protected me for years until I discovered it was also keeping me from healing.",
     },
@@ -46,6 +47,7 @@ export default function RegretsAndLessonsPage() {
       date: "January 2026",
       readTime: "8 min read",
       category: "Life Lessons",
+      image: "/images/regrets/success.jpg",
       excerpt:
         "After achieving everything I wanted, I learned I had been pursuing the wrong goals.",
     },
@@ -55,6 +57,7 @@ export default function RegretsAndLessonsPage() {
       date: "December 2025",
       readTime: "6 min read",
       category: "Growth",
+      image: "/images/regrets/risk.jpg",
       excerpt:
         "My biggest failures came not from mistakes, but from opportunities I never attempted.",
     },
@@ -64,6 +67,7 @@ export default function RegretsAndLessonsPage() {
       date: "November 2025",
       readTime: "10 min read",
       category: "Reflection",
+      image: "/images/regrets/journey.jpg",
       excerpt:
         "I spent years chasing destinations and overlooked the life happening in between.",
     },
@@ -73,6 +77,7 @@ export default function RegretsAndLessonsPage() {
       date: "October 2025",
       readTime: "7 min read",
       category: "Family",
+      image: "/images/regrets/conversation.jpg",
       excerpt:
         "Some words become heavier with time when they remain unspoken.",
     },
@@ -106,27 +111,28 @@ export default function RegretsAndLessonsPage() {
   ];
 
   return (
-    <main className="relative overflow-hidden">
+    <main className="relative overflow-hidden bg-black text-white">
       {/* HERO */}
 
-      <section className="relative min-h-screen flex items-center justify-center px-6">
-        <div className="absolute inset-0 bg-gradient-to-b from-amber-300/10 via-transparent to-transparent" />
+      <section className="relative min-h-screen flex items-center justify-center">
+        <Image
+          src="/images/regrets/hero.jpg"
+          alt="Regrets and Lessons"
+          fill
+          priority
+          className="object-cover"
+        />
 
-        <div className="max-w-7xl mx-auto relative z-10 text-center">
+        <div className="absolute inset-0 bg-black/75" />
+        <div className="absolute inset-0 bg-gradient-to-b from-amber-500/20 via-black/60 to-black" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
           <motion.div
-            initial={{
-              opacity: 0,
-              y: 60,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              duration: 1,
-            }}
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
           >
-            <p className="uppercase tracking-[0.5em] text-zinc-500 mb-8">
+            <p className="uppercase tracking-[0.5em] text-zinc-400 mb-8">
               The Human Archive Collection
             </p>
 
@@ -138,11 +144,10 @@ export default function RegretsAndLessonsPage() {
               Lessons
             </h1>
 
-            <p className="max-w-4xl mx-auto text-xl md:text-2xl text-zinc-400 leading-relaxed">
-              Honest reflections about mistakes,
-              missed opportunities, hard truths,
-              second chances, and the wisdom
-              gained through experience.
+            <p className="max-w-4xl mx-auto text-xl md:text-2xl text-zinc-300 leading-relaxed">
+              Honest reflections about mistakes, missed opportunities,
+              hard truths, second chances, and the wisdom gained through
+              experience.
             </p>
 
             <div className="flex flex-wrap justify-center gap-5 mt-12">
@@ -164,7 +169,7 @@ export default function RegretsAndLessonsPage() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: -60 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
@@ -181,38 +186,46 @@ export default function RegretsAndLessonsPage() {
               </h2>
 
               <p className="text-zinc-400 text-lg leading-relaxed mb-6">
-                Regret is one of the most universal
-                human experiences.
+                Regret is one of the most universal human experiences.
               </p>
 
               <p className="text-zinc-400 text-lg leading-relaxed mb-6">
-                Every person carries memories of
-                decisions they wish they had made
-                differently.
+                Every person carries memories of decisions they wish
+                they had made differently.
               </p>
 
               <p className="text-zinc-400 text-lg leading-relaxed">
-                Yet hidden within regret is something
-                valuable: perspective, growth, and wisdom.
+                Yet hidden within regret is something valuable:
+                perspective, growth, and wisdom.
               </p>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: 60 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="archive-card p-12"
+              className="archive-card overflow-hidden"
             >
-              <Quote className="w-12 h-12 text-amber-300 mb-8" />
+              <div className="relative h-[500px]">
+                <Image
+                  src="/images/regrets/wisdom.jpg"
+                  alt="Wisdom"
+                  fill
+                  className="object-cover"
+                />
 
-              <p className="text-3xl leading-relaxed font-medium">
-                "The purpose of regret is not to
-                punish the past. It is to teach
-                the future."
-              </p>
+                <div className="absolute inset-0 bg-black/65 p-12 flex flex-col justify-end">
+                  <Quote className="w-12 h-12 text-amber-300 mb-8" />
 
-              <div className="mt-8 text-zinc-500">
-                The Human Archive
+                  <p className="text-3xl leading-relaxed font-medium">
+                    "The purpose of regret is not to punish the past.
+                    It is to teach the future."
+                  </p>
+
+                  <div className="mt-8 text-zinc-400">
+                    The Human Archive
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -241,14 +254,9 @@ export default function RegretsAndLessonsPage() {
                 <motion.div
                   key={lesson.title}
                   initial={{ opacity: 0, y: 40 }}
-                  whileInView={{
-                    opacity: 1,
-                    y: 0,
-                  }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{
-                    delay: index * 0.1,
-                  }}
+                  transition={{ delay: index * 0.1 }}
                   className="archive-card p-10 text-center"
                 >
                   <div className="w-20 h-20 rounded-3xl bg-amber-300/10 mx-auto flex items-center justify-center mb-8">
@@ -259,7 +267,7 @@ export default function RegretsAndLessonsPage() {
                     {lesson.title}
                   </h3>
 
-                  <p className="text-zinc-400 leading-relaxed">
+                  <p className="text-zinc-400">
                     {lesson.description}
                   </p>
                 </motion.div>
@@ -275,7 +283,14 @@ export default function RegretsAndLessonsPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="archive-card overflow-hidden">
             <div className="grid lg:grid-cols-2">
-              <div className="min-h-[600px] bg-gradient-to-br from-amber-300/10 via-zinc-900 to-black" />
+              <div className="relative min-h-[650px]">
+                <Image
+                  src="/images/regrets/featured.jpg"
+                  alt="Featured Story"
+                  fill
+                  className="object-cover"
+                />
+              </div>
 
               <div className="p-12 lg:p-16 flex flex-col justify-center">
                 <p className="uppercase tracking-[0.3em] text-zinc-500 mb-6">
@@ -291,12 +306,9 @@ export default function RegretsAndLessonsPage() {
                 </h2>
 
                 <p className="text-zinc-400 text-lg leading-relaxed mb-10">
-                  Looking back years later,
-                  I realized my greatest regret
-                  wasn't failure. It was fear.
-                  Fear of uncertainty,
-                  fear of risk,
-                  and fear of leaving comfort behind.
+                  Looking back years later, I realized my greatest regret
+                  wasn't failure. It was fear. Fear of uncertainty,
+                  fear of risk, and fear of leaving comfort behind.
                 </p>
 
                 <button className="btn-primary w-fit">
@@ -308,7 +320,7 @@ export default function RegretsAndLessonsPage() {
         </div>
       </section>
 
-      {/* STORY GRID */}
+      {/* STORIES */}
 
       <section className="py-32">
         <div className="max-w-7xl mx-auto px-6">
@@ -326,23 +338,22 @@ export default function RegretsAndLessonsPage() {
             {stories.map((story, index) => (
               <motion.article
                 key={story.title}
-                initial={{
-                  opacity: 0,
-                  y: 40,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  delay: index * 0.08,
-                }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.08 }}
                 className="archive-card overflow-hidden group"
               >
-                <div className="h-60 bg-gradient-to-br from-amber-300/10 via-zinc-900 to-black" />
+                <div className="relative h-72 overflow-hidden">
+                  <Image
+                    src={story.image}
+                    alt={story.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+
+                  <div className="absolute inset-0 bg-black/40" />
+                </div>
 
                 <div className="p-8">
                   <span className="px-4 py-2 rounded-full bg-amber-300/10 text-amber-300 text-sm">
@@ -389,21 +400,33 @@ export default function RegretsAndLessonsPage() {
 
       <section className="py-32">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="archive-card p-16 md:p-24 text-center">
-            <Lightbulb className="w-16 h-16 text-amber-300 mx-auto mb-8" />
+          <div className="archive-card relative overflow-hidden">
+            <div className="absolute inset-0">
+              <Image
+                src="/images/regrets/reflection.jpg"
+                alt="Reflection"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-black/80" />
+            </div>
 
-            <h2 className="text-5xl md:text-7xl font-bold mb-10">
-              Every Mistake
-              <br />
-              Contains A Lesson
-            </h2>
+            <div className="relative z-10 p-16 md:p-24 text-center">
+              <Lightbulb className="w-16 h-16 text-amber-300 mx-auto mb-8" />
 
-            <p className="max-w-4xl mx-auto text-zinc-400 text-xl leading-relaxed">
-              Regret reminds us that we cared.
-              Wisdom reminds us that we learned.
-              Together, they become part of the story
-              that shapes who we are.
-            </p>
+              <h2 className="text-5xl md:text-7xl font-bold mb-10">
+                Every Mistake
+                <br />
+                Contains A Lesson
+              </h2>
+
+              <p className="max-w-4xl mx-auto text-zinc-300 text-xl leading-relaxed">
+                Regret reminds us that we cared.
+                Wisdom reminds us that we learned.
+                Together, they become part of the story
+                that shapes who we are.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -462,30 +485,42 @@ export default function RegretsAndLessonsPage() {
 
       <section className="py-32">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="archive-card p-16 md:p-24 text-center">
-            <HeartCrack className="w-16 h-16 text-amber-300 mx-auto mb-8" />
+          <div className="archive-card relative overflow-hidden">
+            <div className="absolute inset-0">
+              <Image
+                src="/images/regrets/share-story.jpg"
+                alt="Share Story"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-black/85" />
+            </div>
 
-            <p className="uppercase tracking-[0.4em] text-zinc-500 mb-6">
-              Share Your Experience
-            </p>
+            <div className="relative z-10 p-16 md:p-24 text-center">
+              <HeartCrack className="w-16 h-16 text-amber-300 mx-auto mb-8" />
 
-            <h2 className="text-5xl md:text-8xl font-bold mb-8">
-              What Did
-              <br />
-              Life Teach You?
-            </h2>
+              <p className="uppercase tracking-[0.4em] text-zinc-500 mb-6">
+                Share Your Experience
+              </p>
 
-            <p className="max-w-3xl mx-auto text-zinc-400 text-xl leading-relaxed mb-12">
-              Every lesson has a story.
-              Every regret has a voice.
-              Share yours and help future readers
-              learn from experiences they haven't lived yet.
-            </p>
+              <h2 className="text-5xl md:text-8xl font-bold mb-8">
+                What Did
+                <br />
+                Life Teach You?
+              </h2>
 
-            <button className="btn-primary text-lg px-10 py-5">
-              Submit Your Story
-              <ArrowRight className="ml-3 w-5 h-5" />
-            </button>
+              <p className="max-w-3xl mx-auto text-zinc-300 text-xl leading-relaxed mb-12">
+                Every lesson has a story.
+                Every regret has a voice.
+                Share yours and help future readers
+                learn from experiences they haven't lived yet.
+              </p>
+
+              <button className="btn-primary text-lg px-10 py-5 inline-flex items-center">
+                Submit Your Story
+                <ArrowRight className="ml-3 w-5 h-5" />
+              </button>
+            </div>
           </div>
         </div>
       </section>

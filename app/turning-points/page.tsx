@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -27,6 +28,7 @@ export default function TurningPointsPage() {
       author: "Anonymous",
       date: "March 2026",
       readTime: "8 min read",
+      image: "/turning-points/train-missed.jpg",
       excerpt:
         "One delayed train led to a conversation that changed the direction of my life forever.",
     },
@@ -36,6 +38,7 @@ export default function TurningPointsPage() {
       author: "Anonymous",
       date: "February 2026",
       readTime: "10 min read",
+      image: "/turning-points/job-rejection.jpg",
       excerpt:
         "What felt like a devastating rejection became the greatest opportunity I never expected.",
     },
@@ -45,6 +48,7 @@ export default function TurningPointsPage() {
       author: "Anonymous",
       date: "January 2026",
       readTime: "7 min read",
+      image: "/turning-points/midnight-call.jpg",
       excerpt:
         "A single call divided my life into before and after.",
     },
@@ -54,6 +58,7 @@ export default function TurningPointsPage() {
       author: "Anonymous",
       date: "December 2025",
       readTime: "9 min read",
+      image: "/turning-points/stranger-cafe.jpg",
       excerpt:
         "Sometimes life changes because of someone you've only known for five minutes.",
     },
@@ -63,6 +68,7 @@ export default function TurningPointsPage() {
       author: "Anonymous",
       date: "November 2025",
       readTime: "12 min read",
+      image: "/turning-points/walking-away.jpg",
       excerpt:
         "The hardest decision I ever made became the most important one.",
     },
@@ -72,6 +78,7 @@ export default function TurningPointsPage() {
       author: "Anonymous",
       date: "October 2025",
       readTime: "11 min read",
+      image: "/turning-points/everything-stopped.jpg",
       excerpt:
         "When life unexpectedly paused, I finally saw what mattered most.",
     },
@@ -109,23 +116,24 @@ export default function TurningPointsPage() {
       {/* HERO */}
 
       <section className="relative min-h-screen flex items-center justify-center px-6">
-        <div className="absolute inset-0 bg-gradient-to-b from-amber-300/10 via-transparent to-transparent" />
+        <Image
+          src="/turning-points/hero.jpg"
+          alt="Turning Point"
+          fill
+          priority
+          className="object-cover"
+        />
+
+        <div className="absolute inset-0 bg-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-amber-500/10 via-black/40 to-black" />
 
         <div className="max-w-7xl mx-auto relative z-10 text-center">
           <motion.div
-            initial={{
-              opacity: 0,
-              y: 60,
-            }}
-            animate={{
-              opacity: 1,
-              y: 0,
-            }}
-            transition={{
-              duration: 1,
-            }}
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
           >
-            <p className="uppercase tracking-[0.5em] text-zinc-500 mb-8">
+            <p className="uppercase tracking-[0.5em] text-zinc-300 mb-8">
               The Human Archive Collection
             </p>
 
@@ -137,7 +145,7 @@ export default function TurningPointsPage() {
               Point
             </h1>
 
-            <p className="max-w-4xl mx-auto text-xl md:text-2xl text-zinc-400 leading-relaxed">
+            <p className="max-w-4xl mx-auto text-xl md:text-2xl text-zinc-300 leading-relaxed">
               Stories about the moments that changed
               everything. The conversations, decisions,
               encounters, and realizations that divided
@@ -163,17 +171,9 @@ export default function TurningPointsPage() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <motion.div
-              initial={{
-                opacity: 0,
-                x: -50,
-              }}
-              whileInView={{
-                opacity: 1,
-                x: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
             >
               <p className="uppercase tracking-[0.4em] text-zinc-500 mb-6">
                 About This Collection
@@ -206,29 +206,31 @@ export default function TurningPointsPage() {
             </motion.div>
 
             <motion.div
-              initial={{
-                opacity: 0,
-                x: 50,
-              }}
-              whileInView={{
-                opacity: 1,
-                x: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              className="archive-card p-12"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="archive-card overflow-hidden"
             >
-              <Quote className="w-12 h-12 text-amber-300 mb-8" />
+              <div className="relative h-[500px]">
+                <Image
+                  src="/turning-points/quote-section.jpg"
+                  alt=""
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-black/60 p-12 flex flex-col justify-center">
+                  <Quote className="w-12 h-12 text-amber-300 mb-8" />
 
-              <p className="text-3xl leading-relaxed font-medium">
-                "Life changes very quickly,
-                in a very positive way,
-                if you let it."
-              </p>
+                  <p className="text-3xl leading-relaxed font-medium">
+                    "Life changes very quickly,
+                    in a very positive way,
+                    if you let it."
+                  </p>
 
-              <div className="mt-8 text-zinc-500">
-                The Human Archive
+                  <div className="mt-8 text-zinc-400">
+                    The Human Archive
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -281,20 +283,10 @@ export default function TurningPointsPage() {
               return (
                 <motion.div
                   key={step.title}
-                  initial={{
-                    opacity: 0,
-                    y: 40,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  viewport={{
-                    once: true,
-                  }}
-                  transition={{
-                    delay: index * 0.1,
-                  }}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
                   className="archive-card p-10 text-center"
                 >
                   <div className="w-20 h-20 rounded-3xl bg-amber-300/10 mx-auto flex items-center justify-center mb-8">
@@ -321,7 +313,14 @@ export default function TurningPointsPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="archive-card overflow-hidden">
             <div className="grid lg:grid-cols-2">
-              <div className="min-h-[650px] bg-gradient-to-br from-amber-300/10 via-zinc-900 to-black" />
+              <div className="relative min-h-[650px]">
+                <Image
+                  src="/turning-points/featured-train.jpg"
+                  alt="The Train I Missed"
+                  fill
+                  className="object-cover"
+                />
+              </div>
 
               <div className="p-12 lg:p-16 flex flex-col justify-center">
                 <span className="text-amber-300 uppercase tracking-[0.3em] mb-6">
@@ -405,23 +404,20 @@ export default function TurningPointsPage() {
             {stories.map((story, index) => (
               <motion.article
                 key={story.title}
-                initial={{
-                  opacity: 0,
-                  y: 40,
-                }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                }}
-                viewport={{
-                  once: true,
-                }}
-                transition={{
-                  delay: index * 0.08,
-                }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.08 }}
                 className="archive-card overflow-hidden group"
               >
-                <div className="h-64 bg-gradient-to-br from-amber-300/10 via-zinc-900 to-black" />
+                <div className="relative h-64 overflow-hidden">
+                  <Image
+                    src={story.image}
+                    alt={story.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                </div>
 
                 <div className="p-8">
                   <span className="px-4 py-2 rounded-full bg-amber-300/10 text-amber-300 text-sm">
@@ -482,29 +478,40 @@ export default function TurningPointsPage() {
 
       <section className="pb-32">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="archive-card p-16 md:p-24 text-center">
-            <BookOpen className="w-16 h-16 text-amber-300 mx-auto mb-8" />
+          <div className="archive-card relative overflow-hidden">
+            <Image
+              src="/turning-points/cta-bg.jpg"
+              alt=""
+              fill
+              className="object-cover"
+            />
 
-            <p className="uppercase tracking-[0.4em] text-zinc-500 mb-6">
-              Share Your Turning Point
-            </p>
+            <div className="absolute inset-0 bg-black/75" />
 
-            <h2 className="text-5xl md:text-8xl font-bold mb-8">
-              What Changed
-              <br />
-              Your Life?
-            </h2>
+            <div className="relative z-10 p-16 md:p-24 text-center">
+              <BookOpen className="w-16 h-16 text-amber-300 mx-auto mb-8" />
 
-            <p className="max-w-3xl mx-auto text-zinc-400 text-xl leading-relaxed mb-12">
-              Everyone has a story about a moment
-              that changed everything.
-              Preserve yours for future generations.
-            </p>
+              <p className="uppercase tracking-[0.4em] text-zinc-400 mb-6">
+                Share Your Turning Point
+              </p>
 
-            <button className="btn-primary text-lg px-10 py-5">
-              Submit Your Story
-              <ChevronRight className="ml-3 w-5 h-5" />
-            </button>
+              <h2 className="text-5xl md:text-8xl font-bold mb-8">
+                What Changed
+                <br />
+                Your Life?
+              </h2>
+
+              <p className="max-w-3xl mx-auto text-zinc-300 text-xl leading-relaxed mb-12">
+                Everyone has a story about a moment
+                that changed everything.
+                Preserve yours for future generations.
+              </p>
+
+              <button className="btn-primary text-lg px-10 py-5">
+                Submit Your Story
+                <ChevronRight className="ml-3 w-5 h-5" />
+              </button>
+            </div>
           </div>
         </div>
       </section>
