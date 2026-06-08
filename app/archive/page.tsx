@@ -48,7 +48,7 @@ export default function ArchivePage() {
       author: "Anonymous",
       date: "March 2026",
       readTime: "6 min read",
-      image: "/stories/story-1.jpg",
+      image: "/images/story1.jpg",
       excerpt:
         "I thought there would be another chance. Another conversation. Another day. I was wrong.",
     },
@@ -70,7 +70,7 @@ export default function ArchivePage() {
       author: "Anonymous",
       date: "January 2026",
       readTime: "5 min read",
-      image: "/stories/story-3.jpg",
+      image: "/images/the-train-i-missed.jpg",
       excerpt:
         "One missed train changed the direction of my entire life.",
     },

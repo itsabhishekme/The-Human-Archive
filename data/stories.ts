@@ -88,7 +88,7 @@ export const stories: Story[] = [
     readTime: "8 min read",
 
     coverImage:
-      "/images/stories/the-call-i-never-returned.jpg",
+      "/images/story1.jpg",
 
     publishedDate: "2026-03-18",
 
