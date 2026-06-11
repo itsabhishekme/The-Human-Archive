@@ -247,11 +247,10 @@ export default function SubmitStoryPage() {
                 <button
                   key={type.name}
                   onClick={() => setStoryType(type.name)}
-                  className={`rounded-3xl border p-8 transition-all duration-300 ${
-                    storyType === type.name
+                  className={`rounded-3xl border p-8 transition-all duration-300 ${storyType === type.name
                       ? "border-amber-300 bg-amber-300/10"
                       : "border-white/10 bg-white/[0.03]"
-                  }`}
+                    }`}
                 >
                   <div className="w-16 h-16 rounded-2xl bg-amber-300/10 mx-auto flex items-center justify-center mb-6">
                     <Icon className="w-8 h-8 text-amber-300" />
@@ -311,80 +310,248 @@ export default function SubmitStoryPage() {
         </div>
       </section>
 
-      {/* FORM */}
+      {/* EXTENDED STORY SUBMISSION PAGE */}
 
-      <section className="pb-32">
-        <div className="max-w-5xl mx-auto px-6">
-          <div className="rounded-[40px] border border-white/10 bg-white/[0.03] p-10 md:p-14">
-            <div className="mb-12">
-              <h2 className="text-4xl md:text-5xl font-black mb-4">
-                Submit Your {storyType}
+      <section className="relative py-32 overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-zinc-950 to-black" />
+        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-amber-500/10 blur-[180px]" />
+        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purple-500/10 blur-[180px]" />
+
+        <div className="relative max-w-6xl mx-auto px-6">
+          {/* Header */}
+          <div className="text-center mb-20">
+            <span className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-amber-400/20 bg-amber-400/10 text-amber-300 text-sm font-medium">
+              Human Stories Matter
+            </span>
+
+            <h1 className="text-5xl md:text-7xl font-black mt-8 leading-tight">
+              Submit Your
+              <span className="block text-amber-400">
+                {storyType}
+              </span>
+            </h1>
+
+            <p className="max-w-3xl mx-auto text-zinc-400 text-lg mt-8 leading-relaxed">
+              Every life contains moments worth preserving.
+              Share your journey, memories, lessons, struggles,
+              breakthroughs, family history, dreams, and
+              experiences that may inspire future generations.
+            </p>
+          </div>
+
+          {/* Guidelines */}
+          <div className="grid md:grid-cols-3 gap-6 mb-16">
+            {[
+              {
+                title: "Be Authentic",
+                desc: "Real experiences create meaningful connections and lasting impact.",
+              },
+              {
+                title: "Be Detailed",
+                desc: "Include emotions, events, challenges, and lessons learned.",
+              },
+              {
+                title: "Be Respectful",
+                desc: "Avoid sharing sensitive information without permission.",
+              },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="rounded-3xl border border-white/10 bg-white/[0.03] p-8"
+              >
+                <h3 className="font-bold text-xl mb-3">
+                  {item.title}
+                </h3>
+
+                <p className="text-zinc-400">
+                  {item.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* FORM */}
+          <div className="rounded-[40px] border border-white/10 bg-white/[0.03] backdrop-blur-xl p-8 md:p-14">
+            <div className="mb-14">
+              <h2 className="text-4xl md:text-5xl font-black mb-5">
+                Story Submission Form
               </h2>
 
-              <p className="text-zinc-400">
-                Honest stories create the deepest
-                connections. Write from experience.
+              <p className="text-zinc-400 text-lg">
+                Complete the form below and help preserve
+                a human experience that deserves to be remembered.
               </p>
             </div>
 
-            <form className="space-y-8">
-              <input
-                type="text"
-                placeholder="Your Name"
-                className="w-full rounded-2xl border border-white/10 bg-black/30 px-6 py-5 outline-none"
-              />
+            <form className="space-y-10">
+              {/* Personal Information */}
+              <div>
+                <h3 className="text-2xl font-bold mb-6">
+                  Personal Information
+                </h3>
 
-              <input
-                type="email"
-                placeholder="Email Address"
-                className="w-full rounded-2xl border border-white/10 bg-black/30 px-6 py-5 outline-none"
-              />
+                <div className="grid md:grid-cols-2 gap-6">
+                  <input
+                    type="text"
+                    placeholder="Full Name"
+                    className="w-full rounded-2xl border border-white/10 bg-black/30 px-6 py-5 outline-none"
+                  />
 
-              <input
-                type="text"
-                placeholder="Story Title"
-                className="w-full rounded-2xl border border-white/10 bg-black/30 px-6 py-5 outline-none"
-              />
+                  <input
+                    type="email"
+                    placeholder="Email Address"
+                    className="w-full rounded-2xl border border-white/10 bg-black/30 px-6 py-5 outline-none"
+                  />
 
-              <select className="w-full rounded-2xl border border-white/10 bg-black/30 px-6 py-5 outline-none">
-                <option>Life Lesson</option>
-                <option>Transformation</option>
-                <option>Memory</option>
-                <option>Family</option>
-                <option>Relationships</option>
-                <option>Career</option>
-                <option>Friendship</option>
-              </select>
+                  <input
+                    type="text"
+                    placeholder="Country"
+                    className="w-full rounded-2xl border border-white/10 bg-black/30 px-6 py-5 outline-none"
+                  />
 
-              <textarea
-                rows={10}
-                placeholder="Share your story..."
-                className="w-full rounded-2xl border border-white/10 bg-black/30 px-6 py-5 outline-none resize-none"
-              />
-
-              <div className="border border-dashed border-white/10 rounded-3xl p-12 text-center">
-                <Upload className="w-10 h-10 mx-auto text-amber-300 mb-4" />
-                <p className="text-zinc-400">
-                  Upload images, letters, journals,
-                  documents, or supporting materials.
-                </p>
+                  <input
+                    type="text"
+                    placeholder="City"
+                    className="w-full rounded-2xl border border-white/10 bg-black/30 px-6 py-5 outline-none"
+                  />
+                </div>
               </div>
 
-              <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                <label className="flex gap-4">
+              {/* Story Details */}
+              <div>
+                <h3 className="text-2xl font-bold mb-6">
+                  Story Information
+                </h3>
+
+                <div className="space-y-6">
+                  <input
+                    type="text"
+                    placeholder="Story Title"
+                    className="w-full rounded-2xl border border-white/10 bg-black/30 px-6 py-5 outline-none"
+                  />
+
+                  <select className="w-full rounded-2xl border border-white/10 bg-black/30 px-6 py-5 outline-none">
+                    <option>Life Lesson</option>
+                    <option>Transformation</option>
+                    <option>Family Story</option>
+                    <option>Childhood Memory</option>
+                    <option>Relationships</option>
+                    <option>Friendship</option>
+                    <option>Marriage</option>
+                    <option>Career Journey</option>
+                    <option>Personal Growth</option>
+                    <option>Travel Experience</option>
+                    <option>Spiritual Experience</option>
+                    <option>Dream Experience</option>
+                    <option>Historical Memory</option>
+                    <option>Legacy Story</option>
+                  </select>
+
+                  <textarea
+                    rows={12}
+                    placeholder="Tell your story in detail..."
+                    className="w-full rounded-3xl border border-white/10 bg-black/30 px-6 py-5 outline-none resize-none"
+                  />
+                </div>
+              </div>
+
+              {/* Additional Context */}
+              <div>
+                <h3 className="text-2xl font-bold mb-6">
+                  Additional Details
+                </h3>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <input
+                    type="text"
+                    placeholder="Approximate Year"
+                    className="w-full rounded-2xl border border-white/10 bg-black/30 px-6 py-5 outline-none"
+                  />
+
+                  <input
+                    type="text"
+                    placeholder="People Involved (Optional)"
+                    className="w-full rounded-2xl border border-white/10 bg-black/30 px-6 py-5 outline-none"
+                  />
+                </div>
+              </div>
+
+              {/* Upload Section */}
+              <div>
+                <h3 className="text-2xl font-bold mb-6">
+                  Supporting Materials
+                </h3>
+
+                <div className="border-2 border-dashed border-white/10 rounded-[32px] p-14 text-center hover:border-amber-400/30 transition">
+                  <Upload className="w-14 h-14 mx-auto text-amber-300 mb-5" />
+
+                  <h4 className="font-bold text-xl mb-3">
+                    Upload Files
+                  </h4>
+
+                  <p className="text-zinc-400 max-w-xl mx-auto">
+                    Photos, letters, journals, voice recordings,
+                    scanned documents, certificates, memories,
+                    family archives, and other supporting files.
+                  </p>
+
+                  <button
+                    type="button"
+                    className="mt-8 px-8 py-4 rounded-2xl bg-amber-400 text-black font-bold"
+                  >
+                    Choose Files
+                  </button>
+                </div>
+              </div>
+
+              {/* Permissions */}
+              <div className="space-y-5">
+                <label className="flex gap-4 rounded-2xl border border-white/10 p-6">
                   <input type="checkbox" />
-                  <span className="text-zinc-400 text-sm">
-                    I understand my submission may be
-                    reviewed and considered for publication
-                    within The Human Archive.
+
+                  <span className="text-zinc-400">
+                    I confirm that this story is my own experience
+                    or I have permission to share it.
+                  </span>
+                </label>
+
+                <label className="flex gap-4 rounded-2xl border border-white/10 p-6">
+                  <input type="checkbox" />
+
+                  <span className="text-zinc-400">
+                    I understand submissions may be reviewed,
+                    edited for clarity, and considered for
+                    publication within The Human Archive.
+                  </span>
+                </label>
+
+                <label className="flex gap-4 rounded-2xl border border-white/10 p-6">
+                  <input type="checkbox" />
+
+                  <span className="text-zinc-400">
+                    I agree to the archive guidelines and
+                    consent to the secure storage of my
+                    submitted materials.
                   </span>
                 </label>
               </div>
 
-              <button className="w-full py-5 rounded-2xl bg-amber-400 text-black font-bold text-lg flex items-center justify-center gap-3">
-                Submit Story
-                <Send className="w-5 h-5" />
-              </button>
+              {/* Submit */}
+              <div className="pt-6">
+                <button
+                  type="submit"
+                  className="w-full py-6 rounded-3xl bg-amber-400 text-black font-black text-lg flex items-center justify-center gap-3 hover:scale-[1.01] transition"
+                >
+                  Submit Story
+                  <Send className="w-5 h-5" />
+                </button>
+
+                <p className="text-center text-zinc-500 mt-6 text-sm">
+                  Thank you for contributing to the preservation
+                  of human experiences and memories.
+                </p>
+              </div>
             </form>
           </div>
         </div>
